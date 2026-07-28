@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 2 — I/O, Comments & Control Flow | Java ST-1</title>
+<meta name="description" content="Input/output, comments, if-else, switch aur loops (for, while, do-while) — detail me Hinglish notes.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-in">
+    <a class="brand" href="index.html"><span class="logo">J</span> Java ST-1</a>
+    <span class="spacer"></span>
+    <a class="home-link" href="index.html">← All Modules</a>
+  </div>
+</nav>
+<main>
+<div class="wrap">
+  <div class="crumbs"><a href="index.html">Home</a> / Module 2</div>
+  <div class="eyebrow">Module 2 · Sessions 5–12</div>
+  <h1>I/O, Comments & Control Flow</h1>
+  <p class="lead">Is module me input/output lena-dena, comments, decision-making (if/switch) aur loops (for, while, do-while) — sab detail me samjhenge with examples.</p>
+
+  <h2 id="output">1. Output — Screen par cheezein dikhana</h2>
+  <p>Java me output ke liye <code>System.out</code> use hota hai:</p>
+  <div class="table-wrap"><table>
+    <tr><th>Method</th><th>Kaam</th></tr>
+    <tr><td><code>print()</code></td><td>Print karta hai, next line par nahi jaata.</td></tr>
+    <tr><td><code>println()</code></td><td>Print karke <strong>next line</strong> par chala jaata hai (ln = line).</td></tr>
+    <tr><td><code>printf()</code></td><td>Formatted output (jaise <code>%d</code>, <code>%s</code>, <code>%f</code>).</td></tr>
+  </table></div>
+  <pre><code>System.out.print(<span class="tok-str">"Hello "</span>);
+System.out.println(<span class="tok-str">"World"</span>);   <span class="tok-com">// next line</span>
+System.out.printf(<span class="tok-str">"Age: %d"</span>, <span class="tok-num">20</span>);</code></pre>
+
+  <h2 id="input">2. Input — User se data lena (Scanner)</h2>
+  <p>User se input lene ke liye <strong>Scanner</strong> class use hoti hai. Pehle ise import karna padta hai.</p>
+  <pre><code><span class="tok-key">import</span> java.util.Scanner;
+
+<span class="tok-key">public class</span> <span class="tok-type">Demo</span> {
+  <span class="tok-key">public static void</span> main(<span class="tok-type">String</span>[] args) {
+    <span class="tok-type">Scanner</span> sc = <span class="tok-key">new</span> <span class="tok-type">Scanner</span>(System.in);
+    System.out.print(<span class="tok-str">"Naam daalo: "</span>);
+    <span class="tok-type">String</span> name = sc.nextLine();
+    System.out.print(<span class="tok-str">"Age daalo: "</span>);
+    <span class="tok-type">int</span> age = sc.nextInt();
+    System.out.println(<span class="tok-str">"Hi "</span> + name + <span class="tok-str">", age "</span> + age);
+  }
+}</code></pre>
+  <div class="table-wrap"><table>
+    <tr><th>Method</th><th>Kya padhta hai</th></tr>
+    <tr><td><code>nextInt()</code></td><td>int number</td></tr>
+    <tr><td><code>nextDouble()</code></td><td>decimal number</td></tr>
+    <tr><td><code>next()</code></td><td>ek word (space tak)</td></tr>
+    <tr><td><code>nextLine()</code></td><td>poori line (spaces ke saath)</td></tr>
+  </table></div>
+  <div class="callout warn"><span class="ico">⚠️</span><div><div class="t">Famous Scanner bug</div><p><code>nextInt()</code> ke baad <code>nextLine()</code> use karo to wo <strong>skip</strong> ho jaata hai (kyunki Enter ka <code>\n</code> reh jaata hai). Fix: ek extra <code>sc.nextLine()</code> laga do.</p></div></div>
+
+  <h2 id="comments">3. Comments</h2>
+  <p>Comments code ko explain karte hain — JVM inhe ignore karta hai (chalte nahi).</p>
+  <pre><code><span class="tok-com">// single line comment</span>
+
+<span class="tok-com">/* multi-line
+   comment */</span>
+
+<span class="tok-com">/** documentation comment (Javadoc) */</span></code></pre>
+  <ul>
+    <li><code>//</code> — single line</li>
+    <li><code>/* ... */</code> — multi-line</li>
+    <li><code>/** ... */</code> — Javadoc (documentation banane ke liye)</li>
+  </ul>
+
+  <h2 id="if">4. Decision Making — if / else</h2>
+  <p>Condition ke hisaab se alag code chalane ke liye. Condition hamesha <code>true</code>/<code>false</code> deti hai.</p>
+  <h3>a) if, if-else, else-if ladder</h3>
+  <pre><code><span class="tok-type">int</span> marks = <span class="tok-num">75</span>;
+<span class="tok-key">if</span> (marks &gt;= <span class="tok-num">90</span>) {
+    System.out.println(<span class="tok-str">"A grade"</span>);
+} <span class="tok-key">else if</span> (marks &gt;= <span class="tok-num">60</span>) {
+    System.out.println(<span class="tok-str">"B grade"</span>);
+} <span class="tok-key">else</span> {
+    System.out.println(<span class="tok-str">"Fail"</span>);
+}</code></pre>
+  <h3>b) Nested if</h3>
+  <p>Ek <code>if</code> ke andar dusra <code>if</code>. Jaise: pehle age check, phir usi ke andar dusri condition.</p>
+  <h3>c) Ternary operator (shortcut)</h3>
+  <pre><code><span class="tok-type">String</span> res = (marks &gt;= <span class="tok-num">33</span>) ? <span class="tok-str">"Pass"</span> : <span class="tok-str">"Fail"</span>;
+<span class="tok-com">// condition ? true_wala : false_wala</span></code></pre>
+
+  <h2 id="switch">5. switch statement</h2>
+  <p>Jab ek hi variable ki bahut saari values check karni ho, tab <code>if-else</code> ki jagah <code>switch</code> saaf-suthra rehta hai.</p>
+  <pre><code><span class="tok-type">int</span> day = <span class="tok-num">3</span>;
+<span class="tok-key">switch</span> (day) {
+    <span class="tok-key">case</span> <span class="tok-num">1</span>: System.out.println(<span class="tok-str">"Monday"</span>); <span class="tok-key">break</span>;
+    <span class="tok-key">case</span> <span class="tok-num">3</span>: System.out.println(<span class="tok-str">"Wednesday"</span>); <span class="tok-key">break</span>;
+    <span class="tok-key">default</span>: System.out.println(<span class="tok-str">"Other day"</span>);
+}</code></pre>
+  <div class="callout exam"><span class="ico">🎯</span><div><div class="t">Exam point — break zaroori hai</div><p>Har <code>case</code> ke baad <code>break</code> na lagao to <strong>fall-through</strong> ho jaata hai — matlab agla case bhi chal jaata hai. <code>default</code> tab chalta hai jab koi case match na ho.</p></div></div>
+
+  <h2 id="loops">6. Loops — kaam baar-baar karna</h2>
+  <p>Loop ek kaam ko bar-bar (repeat) karne ke liye hota hai. Java me 3 main loops hain.</p>
+  <h3>a) for loop</h3>
+  <p>Jab pata ho kitni baar chalana hai. Syntax: <code>for(initialization; condition; update)</code></p>
+  <pre><code><span class="tok-key">for</span> (<span class="tok-type">int</span> i = <span class="tok-num">1</span>; i &lt;= <span class="tok-num">5</span>; i++) {
+    System.out.println(<span class="tok-str">"Number: "</span> + i);
+}</code></pre>
+  <h3>b) while loop</h3>
+  <p>Jab pata na ho kitni baar — condition true rahe tab tak chalega. Pehle <strong>check</strong>, phir chalega (entry-controlled).</p>
+  <pre><code><span class="tok-type">int</span> i = <span class="tok-num">1</span>;
+<span class="tok-key">while</span> (i &lt;= <span class="tok-num">5</span>) {
+    System.out.println(i);
+    i++;
+}</code></pre>
+  <h3>c) do-while loop</h3>
+  <p>Pehle <strong>ek baar chalega</strong>, phir condition check hogi (exit-controlled). Matlab kam se kam ek baar zaroor chalega.</p>
+  <pre><code><span class="tok-type">int</span> i = <span class="tok-num">1</span>;
+<span class="tok-key">do</span> {
+    System.out.println(i);
+    i++;
+} <span class="tok-key">while</span> (i &lt;= <span class="tok-num">5</span>);</code></pre>
+  <div class="table-wrap"><table>
+    <tr><th>Loop</th><th>Kab use karein</th><th>Condition check</th></tr>
+    <tr><td><code>for</code></td><td>Count pata ho</td><td>Chalne se pehle</td></tr>
+    <tr><td><code>while</code></td><td>Count na pata ho</td><td>Chalne se pehle</td></tr>
+    <tr><td><code>do-while</code></td><td>Kam se kam 1 baar chale</td><td>Chalne ke baad</td></tr>
+  </table></div>
+
+  <h3>break aur continue</h3>
+  <ul>
+    <li><strong><code>break</code></strong> — loop ko <em>turant</em> band kar deta hai.</li>
+    <li><strong><code>continue</code></strong> — current iteration <em>skip</em> karke agli par chala jaata hai.</li>
+  </ul>
+  <pre><code><span class="tok-key">for</span> (<span class="tok-type">int</span> i = <span class="tok-num">1</span>; i &lt;= <span class="tok-num">5</span>; i++) {
+    <span class="tok-key">if</span> (i == <span class="tok-num">3</span>) <span class="tok-key">continue</span>;  <span class="tok-com">// 3 skip</span>
+    <span class="tok-key">if</span> (i == <span class="tok-num">5</span>) <span class="tok-key">break</span>;     <span class="tok-com">// 5 par ruk jao</span>
+    System.out.println(i);        <span class="tok-com">// output: 1 2 4</span>
+}</code></pre>
+
+  <div class="keybox"><h4>✅ Quick Revision</h4><ul>
+    <li><code>print</code> vs <code>println</code> — ln next line par jaata hai.</li>
+    <li>Input = <strong>Scanner</strong> (<code>nextInt</code>, <code>nextLine</code>...). <code>nextInt</code> ke baad <code>nextLine</code> ka bug yaad rakho.</li>
+    <li><code>switch</code> me <strong>break</strong> zaroori, warna fall-through.</li>
+    <li><code>while</code> = pehle check, <code>do-while</code> = pehle chal (min 1 baar).</li>
+    <li><code>break</code> = loop khatam, <code>continue</code> = ek iteration skip.</li>
+  </ul></div>
+
+  <h3>Practice Questions</h3>
+  <details class="qa"><summary>while aur do-while me main difference?</summary><div class="a"><code>while</code> pehle condition check karta hai, isliye condition false ho to <strong>ek baar bhi nahi</strong> chalega. <code>do-while</code> pehle body chalata hai, isliye <strong>kam se kam ek baar</strong> zaroor chalega.</div></details>
+  <details class="qa"><summary>switch me break na lagayein to kya hoga?</summary><div class="a"><strong>Fall-through</strong> hoga — matched case ke baad ke saare cases bhi chal jaayenge jab tak break/end na aaye.</div></details>
+  <details class="qa"><summary>break aur continue me farak?</summary><div class="a"><code>break</code> poora loop band kar deta hai. <code>continue</code> sirf current chakkar (iteration) skip karke agle par jaata hai.</div></details>
+
+  <div class="pager">
+    <a href="intro.html"><span class="dir">← Previous</span><span class="t2">Module 1: Java Basics</span></a>
+    <a class="nx" href="methods.html"><span class="dir">Next →</span><span class="t2">Module 3: Methods</span></a>
+  </div>
+</div>
+</main>
+<footer class="wrap">Made for Ashu's Java ST-1 prep · Module 2 of 6</footer>
+<script src="js/main.js"></script>
+</body>
+</html>
