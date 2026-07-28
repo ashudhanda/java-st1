@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 4 — Arrays & Strings | Java ST-1</title>
+<meta name="description" content="Arrays (1D/2D), array traversal, aur String basics + common String methods — detail me Hinglish notes.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-in">
+    <a class="brand" href="index.html"><span class="logo">J</span> Java ST-1</a>
+    <span class="spacer"></span>
+    <a class="home-link" href="index.html">← All Modules</a>
+  </div>
+</nav>
+<main>
+<div class="wrap">
+  <div class="crumbs"><a href="index.html">Home</a> / Module 4</div>
+  <div class="eyebrow">Module 4 · Sessions 15–21</div>
+  <h1>Arrays & Strings</h1>
+  <p class="lead">Array = ek hi type ki bahut saari values ek jagah. String = characters ka group (text). Is module me 1D/2D arrays, traversal aur String ke common methods samjhenge.</p>
+
+  <h2 id="array">1. Array kya hai?</h2>
+  <p><strong>Array</strong> ek container hai jo ek hi data type ke <strong>multiple values</strong> ek saath store karta hai. 100 marks store karne ke liye 100 variable banane ki zaroorat nahi — ek array kaafi hai.</p>
+  <div class="keybox"><h4>🔑 Key baatein</h4><ul>
+    <li>Array ka size <strong>fixed</strong> hota hai (ek baar set to badalega nahi).</li>
+    <li>Index <strong>0 se</strong> shuru hota hai (pehla element = index 0).</li>
+    <li>Same data type ke elements hi rakh sakte ho.</li>
+  </ul></div>
+
+  <h2 id="1d">2. One-Dimensional (1D) Array</h2>
+  <h3>Declaration & Initialization</h3>
+  <pre><code><span class="tok-com">// Tarika 1: declare karke new se size do</span>
+<span class="tok-type">int</span>[] marks = <span class="tok-key">new</span> <span class="tok-type">int</span>[<span class="tok-num">5</span>];   <span class="tok-com">// 5 elements (sab 0)</span>
+marks[<span class="tok-num">0</span>] = <span class="tok-num">90</span>;
+marks[<span class="tok-num">1</span>] = <span class="tok-num">85</span>;
+
+<span class="tok-com">// Tarika 2: seedha values ke saath</span>
+<span class="tok-type">int</span>[] nums = {<span class="tok-num">10</span>, <span class="tok-num">20</span>, <span class="tok-num">30</span>, <span class="tok-num">40</span>};</code></pre>
+  <h3>Traversal — saare elements ghoomna</h3>
+  <pre><code><span class="tok-com">// normal for loop</span>
+<span class="tok-key">for</span> (<span class="tok-type">int</span> i = <span class="tok-num">0</span>; i &lt; nums.length; i++) {
+    System.out.println(nums[i]);
+}
+
+<span class="tok-com">// for-each loop (aasaan)</span>
+<span class="tok-key">for</span> (<span class="tok-type">int</span> n : nums) {
+    System.out.println(n);
+}</code></pre>
+  <div class="callout tip"><span class="ico">💡</span><div><div class="t">length yaad rakho</div><p>Array ka size <code>arrayName.length</code> se milta hai (ye <strong>property</strong> hai, method nahi — isliye <code>()</code> nahi lagta). String me <code>length()</code> method hota hai — dono me confuse mat karna.</p></div></div>
+  <div class="callout warn"><span class="ico">⚠️</span><div><div class="t">Common error</div><p>Index range ke bahar jaane par <code>ArrayIndexOutOfBoundsException</code> aata hai. 5 size wale array me valid index sirf <strong>0 se 4</strong> tak hote hain.</p></div></div>
+
+  <h2 id="2d">3. Two-Dimensional (2D) Array</h2>
+  <p>2D array matlab <strong>rows aur columns</strong> wala table (matrix). </p>
+  <pre><code><span class="tok-type">int</span>[][] matrix = {
+    {<span class="tok-num">1</span>, <span class="tok-num">2</span>, <span class="tok-num">3</span>},
+    {<span class="tok-num">4</span>, <span class="tok-num">5</span>, <span class="tok-num">6</span>}
+};
+System.out.println(matrix[<span class="tok-num">1</span>][<span class="tok-num">2</span>]);   <span class="tok-com">// row 1, col 2 = 6</span>
+
+<span class="tok-com">// nested loop se traversal</span>
+<span class="tok-key">for</span> (<span class="tok-type">int</span> i = <span class="tok-num">0</span>; i &lt; matrix.length; i++) {
+    <span class="tok-key">for</span> (<span class="tok-type">int</span> j = <span class="tok-num">0</span>; j &lt; matrix[i].length; j++) {
+        System.out.print(matrix[i][j] + <span class="tok-str">" "</span>);
+    }
+}</code></pre>
+
+  <h2 id="string">4. Strings</h2>
+  <p><strong>String</strong> characters ka sequence hai (text). Java me String ek <strong>class</strong> hai (non-primitive), aur ek baar bana hua String <strong>immutable</strong> (badla nahi ja sakta) hota hai.</p>
+  <pre><code><span class="tok-type">String</span> s1 = <span class="tok-str">"Hello"</span>;             <span class="tok-com">// literal (recommended)</span>
+<span class="tok-type">String</span> s2 = <span class="tok-key">new</span> <span class="tok-type">String</span>(<span class="tok-str">"Hello"</span>);  <span class="tok-com">// new keyword se</span></code></pre>
+  <div class="callout exam"><span class="ico">🎯</span><div><div class="t">Exam point — Immutable</div><p>String immutable hai — change karne par naya object banta hai, purana wahi rehta hai. Baar-baar change karne ke liye <strong>StringBuilder</strong> (mutable) use karte hain.</p></div></div>
+
+  <h3>Common String Methods (yaad rakho)</h3>
+  <div class="table-wrap"><table>
+    <tr><th>Method</th><th>Kaam</th><th>Example (s = "Hello")</th></tr>
+    <tr><td><code>length()</code></td><td>Length (characters count)</td><td>s.length() &rarr; 5</td></tr>
+    <tr><td><code>charAt(i)</code></td><td>i-th index ka char</td><td>s.charAt(1) &rarr; 'e'</td></tr>
+    <tr><td><code>toUpperCase()</code></td><td>Capital me badle</td><td>&rarr; "HELLO"</td></tr>
+    <tr><td><code>toLowerCase()</code></td><td>Small me badle</td><td>&rarr; "hello"</td></tr>
+    <tr><td><code>substring(a,b)</code></td><td>a se b-1 tak ka part</td><td>s.substring(0,3) &rarr; "Hel"</td></tr>
+    <tr><td><code>indexOf(x)</code></td><td>x pehli baar kaha mila</td><td>s.indexOf('l') &rarr; 2</td></tr>
+    <tr><td><code>equals(x)</code></td><td>Content same hai? (true/false)</td><td>s.equals("Hello") &rarr; true</td></tr>
+    <tr><td><code>concat(x)</code> / <code>+</code></td><td>Do string jodna</td><td>"Hi"+" Ashu" &rarr; "Hi Ashu"</td></tr>
+    <tr><td><code>trim()</code></td><td>Aage-peeche ke spaces hatao</td><td>" hi ".trim() &rarr; "hi"</td></tr>
+  </table></div>
+
+  <div class="callout warn"><span class="ico">⚠️</span><div><div class="t">== vs .equals() (super important)</div><p><code>==</code> do strings ke <strong>reference (address)</strong> compare karta hai. <code>.equals()</code> unka <strong>actual content</strong> compare karta hai. String compare karne ke liye <strong>hamesha <code>.equals()</code></strong> use karo.</p></div></div>
+
+  <div class="keybox"><h4>✅ Quick Revision</h4><ul>
+    <li>Array = same type, fixed size, index <strong>0 se</strong> shuru.</li>
+    <li>Size = <code>arr.length</code> (no brackets); String me <code>length()</code> (method).</li>
+    <li>2D array = rows &times; columns; nested loop se traverse.</li>
+    <li>String <strong>immutable</strong> hai; badalne ke liye StringBuilder.</li>
+    <li>String content compare karne ke liye <code>.equals()</code>, <code>==</code> nahi.</li>
+  </ul></div>
+
+  <h3>Practice Questions</h3>
+  <details class="qa"><summary>arr.length aur str.length() me farak?</summary><div class="a">Array me <code>length</code> ek <strong>property</strong> hai (bracket nahi). String me <code>length()</code> ek <strong>method</strong> hai (bracket lagti hai).</div></details>
+  <details class="qa"><summary>String immutable hone ka matlab?</summary><div class="a">Ek baar bana String change nahi hota. Change karne par naya object banta hai. Isliye bahut changes ke liye StringBuilder better hai.</div></details>
+  <details class="qa"><summary>Strings compare karne ka sahi tarika?</summary><div class="a"><code>.equals()</code> use karo — wo content compare karta hai. <code>==</code> sirf reference compare karta hai, jo galat result de sakta hai.</div></details>
+
+  <div class="pager">
+    <a href="methods.html"><span class="dir">← Previous</span><span class="t2">Module 3: Methods</span></a>
+    <a class="nx" href="oop.html"><span class="dir">Next →</span><span class="t2">Module 5: Classes & Objects</span></a>
+  </div>
+</div>
+</main>
+<footer class="wrap">Made for Ashu's Java ST-1 prep · Module 4 of 6</footer>
+<script src="js/main.js"></script>
+</body>
+</html>
