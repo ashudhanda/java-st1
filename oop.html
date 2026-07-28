@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 5 — Classes, Objects, Constructors & this | Java ST-1</title>
+<meta name="description" content="Class, object, constructor (default/parameterized/copy), constructor overloading aur this keyword — detail me Hinglish notes.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-in">
+    <a class="brand" href="index.html"><span class="logo">J</span> Java ST-1</a>
+    <span class="spacer"></span>
+    <a class="home-link" href="index.html">← All Modules</a>
+  </div>
+</nav>
+<main>
+<div class="wrap">
+  <div class="crumbs"><a href="index.html">Home</a> / Module 5</div>
+  <div class="eyebrow">Module 5 · Sessions 22–32</div>
+  <h1>Classes, Objects, Constructors & <code>this</code></h1>
+  <p class="lead">Ye OOP (Object-Oriented Programming) ki neev hai — aur exam ka sabse important part. Class, object, constructors ke saare types, overloading aur <code>this</code> keyword — sab ekdum detail me.</p>
+
+  <h2 id="class">1. Class — blueprint (naksha)</h2>
+  <p><strong>Class</strong> ek <strong>blueprint / design</strong> hai jisse objects bante hain. Isme do cheezein hoti hain: <strong>properties</strong> (variables — object ke paas kya hai) aur <strong>methods</strong> (functions — object kya kar sakta hai). Class khud koi real cheez nahi, sirf design hai.</p>
+  <pre><code><span class="tok-key">class</span> <span class="tok-type">Car</span> {
+    <span class="tok-com">// properties (instance variables)</span>
+    <span class="tok-type">String</span> colour;
+    <span class="tok-type">int</span> speed;
+
+    <span class="tok-com">// method (behaviour)</span>
+    <span class="tok-key">void</span> chalao() {
+        System.out.println(<span class="tok-str">"Car chal rahi hai"</span>);
+    }
+}</code></pre>
+
+  <h2 id="object">2. Object — asli cheez</h2>
+  <p><strong>Object</strong> class se banai gayi asli (real) cheez hai. Ek class se aap jitne chahe utne objects bana sakte ho. Object <code>new</code> keyword se banta hai.</p>
+  <pre><code><span class="tok-type">Car</span> c1 = <span class="tok-key">new</span> <span class="tok-type">Car</span>();   <span class="tok-com">// object banaya</span>
+c1.colour = <span class="tok-str">"Red"</span>;         <span class="tok-com">// property set ki</span>
+c1.speed = <span class="tok-num">120</span>;
+c1.chalao();                <span class="tok-com">// method call kiya</span></code></pre>
+  <div class="callout tip"><span class="ico">💡</span><div><div class="t">Simple analogy</div><p><strong>Class</strong> = car ka naksha. <strong>Object</strong> = us naksha se bani asli car. Ek naksha se kai cars ban sakti hain — meri red car, teri black car (dono alag objects).</p></div></div>
+  <div class="callout warn"><span class="ico">⚠️</span><div><div class="t">new kya karta hai?</div><p><code>new</code> keyword <strong>heap memory</strong> me object ke liye jagah banata hai aur uska constructor call karta hai. <code>c1</code> us object ka <em>reference</em> (address) pakadta hai.</p></div></div>
+
+  <h2 id="constructor">3. Constructor — (Exam ka favourite ⭐)</h2>
+  <p><strong>Constructor</strong> ek special method hai jo object bante hi <strong>apne aap (automatically)</strong> chal jaata hai — mostly object ki values set (initialize) karne ke liye.</p>
+  <div class="keybox"><h4>🔑 Constructor ki 3 pakki baatein (yaad rakho)</h4><ul>
+    <li>Iska naam <strong>class ke naam jaisa exactly same</strong> hota hai.</li>
+    <li>Iska koi <strong>return type nahi</strong> hota (<code>void</code> bhi nahi).</li>
+    <li>Jab bhi <code>new</code> se object banta hai, ye <strong>automatic call</strong> hota hai.</li>
+  </ul></div>
+  <pre><code><span class="tok-key">class</span> <span class="tok-type">Car</span> {
+    <span class="tok-type">String</span> colour;
+
+    <span class="tok-com">// Constructor (naam class jaisa, no return type)</span>
+    <span class="tok-type">Car</span>(<span class="tok-type">String</span> c) {
+        colour = c;
+        System.out.println(<span class="tok-str">"Nayi car bani: "</span> + colour);
+    }
+}
+
+<span class="tok-type">Car</span> c1 = <span class="tok-key">new</span> <span class="tok-type">Car</span>(<span class="tok-str">"Red"</span>);  <span class="tok-com">// constructor apne aap chalega</span></code></pre>
+
+  <h3>Constructor ke Types</h3>
+  <div class="table-wrap"><table>
+    <tr><th>Type</th><th>Matlab</th></tr>
+    <tr><td><strong>Default constructor</strong></td><td>Bina parameter wala. Agar tum koi constructor na banao, Java khud ek khaali default constructor bana deta hai (jo variables ko default value deta hai: 0, null, false).</td></tr>
+    <tr><td><strong>Parameterized constructor</strong></td><td>Jisme parameters/values pass karte ho (jaise upar <code>Car("Red")</code>).</td></tr>
+    <tr><td><strong>Copy constructor</strong></td><td>Ek object ki values dusre naye object me copy karne ke liye.</td></tr>
+  </table></div>
+  <pre><code><span class="tok-key">class</span> <span class="tok-type">Student</span> {
+    <span class="tok-type">String</span> name;
+    <span class="tok-type">int</span> age;
+
+    <span class="tok-type">Student</span>() {                    <span class="tok-com">// 1. default</span>
+        name = <span class="tok-str">"Unknown"</span>; age = <span class="tok-num">0</span>;
+    }
+    <span class="tok-type">Student</span>(<span class="tok-type">String</span> n, <span class="tok-type">int</span> a) {    <span class="tok-com">// 2. parameterized</span>
+        name = n; age = a;
+    }
+    <span class="tok-type">Student</span>(<span class="tok-type">Student</span> s) {             <span class="tok-com">// 3. copy constructor</span>
+        name = s.name; age = s.age;
+    }
+}</code></pre>
+
+  <h3 id="cons-overload">Constructor Overloading</h3>
+  <p>Ek hi class me <strong>multiple constructors</strong> banana (alag-alag parameters ke saath) — bilkul method overloading jaisa. Upar wale <code>Student</code> example me teeno constructors overloaded hi hain.</p>
+  <div class="callout exam"><span class="ico">🎯</span><div><div class="t">Exam point — Constructor vs Method</div><p>Constructor ka naam <strong>class jaisa</strong> hota hai + <strong>no return type</strong> + object bante hi auto-call. Method ka koi bhi naam ho sakta hai + return type hota hai + manually call karna padta hai.</p></div></div>
+
+  <h2 id="this">4. <code>this</code> keyword</h2>
+  <p><code>this</code> ek reference variable hai jo <strong>current object</strong> ko point karta hai ("ye wala object"). Iske teen main use hain:</p>
+  <h3>a) Instance variable aur parameter ka naam same ho tab</h3>
+  <p>Sabse common use. Jab constructor/method ka parameter aur instance variable ka naam same ho, to <code>this</code> se batate hain ki "class wala" variable kaunsa hai.</p>
+  <pre><code><span class="tok-key">class</span> <span class="tok-type">Student</span> {
+    <span class="tok-type">String</span> name;
+    <span class="tok-type">Student</span>(<span class="tok-type">String</span> name) {
+        <span class="tok-key">this</span>.name = name;   <span class="tok-com">// this.name = object ka; name = parameter</span>
+    }
+}</code></pre>
+  <div class="callout warn"><span class="ico">⚠️</span><div><div class="t">this ke bina kya hota?</div><p>Agar <code>this.name = name</code> ki jagah sirf <code>name = name</code> likhte, to Java dono ko parameter hi samajhta aur object ki value set hi nahi hoti (self-assignment). Isliye <code>this</code> zaroori hai.</p></div></div>
+  <h3>b) Ek constructor se dusra constructor call karna — this()</h3>
+  <pre><code><span class="tok-type">Student</span>() {
+    <span class="tok-key">this</span>(<span class="tok-str">"Unknown"</span>, <span class="tok-num">0</span>);   <span class="tok-com">// parameterized constructor call</span>
+}</code></pre>
+  <h3>c) Current object ko return / pass karna</h3>
+  <p><code>return this;</code> se current object khud wapas kar sakte ho (method chaining me kaam aata hai).</p>
+
+  <div class="keybox"><h4>✅ Quick Revision (Module 5 ka nichod)</h4><ul>
+    <li><strong>Class</strong> = blueprint (design). <strong>Object</strong> = usse bani real cheez (<code>new</code> se).</li>
+    <li><strong>Constructor</strong> = special method, naam class jaisa, no return type, auto-call on object creation.</li>
+    <li>Types: <strong>default</strong>, <strong>parameterized</strong>, <strong>copy</strong>.</li>
+    <li><strong>Constructor overloading</strong> = same class, alag parameters wale multiple constructors.</li>
+    <li><code>this</code> = current object; sabse common use: <code>this.var = var</code> naming clash solve karna.</li>
+  </ul></div>
+
+  <h3>Practice Questions</h3>
+  <details class="qa"><summary>Constructor aur method me difference?</summary><div class="a">Constructor ka naam class jaisa hota hai, koi return type nahi, aur object bante hi auto call hota hai. Method ka koi bhi naam ho sakta hai, return type hota hai, aur ise khud call karna padta hai.</div></details>
+  <details class="qa"><summary>Default constructor kab banta hai?</summary><div class="a">Jab tum apni class me <strong>koi bhi constructor nahi</strong> likhte, tab Java automatically ek khaali default constructor bana deta hai jo variables ko default values (0, null, false) deta hai.</div></details>
+  <details class="qa"><summary>this keyword kya hai?</summary><div class="a"><code>this</code> current object ka reference hai. Iska sabse common use: jab parameter aur instance variable ka naam same ho, tab <code>this.var</code> se object wala variable point karte hain.</div></details>
+  <details class="qa"><summary>Constructor overloading kya hai?</summary><div class="a">Ek hi class me alag-alag parameters wale multiple constructors banana. Object banate waqt jaise arguments do, waisa hi constructor chal jaata hai.</div></details>
+
+  <div class="pager">
+    <a href="arrays-strings.html"><span class="dir">← Previous</span><span class="t2">Module 4: Arrays & Strings</span></a>
+    <a class="nx" href="static.html"><span class="dir">Next →</span><span class="t2">Module 6: Static Members</span></a>
+  </div>
+</div>
+</main>
+<footer class="wrap">Made for Ashu's Java ST-1 prep · Module 5 of 6</footer>
+<script src="js/main.js"></script>
+</body>
+</html>
