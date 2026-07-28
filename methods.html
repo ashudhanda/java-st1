@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 3 — Methods & Parameter Passing | Java ST-1</title>
+<meta name="description" content="Methods banana, parameters/arguments, return type, method overloading aur pass-by-value — detail me Hinglish notes.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-in">
+    <a class="brand" href="index.html"><span class="logo">J</span> Java ST-1</a>
+    <span class="spacer"></span>
+    <a class="home-link" href="index.html">← All Modules</a>
+  </div>
+</nav>
+<main>
+<div class="wrap">
+  <div class="crumbs"><a href="index.html">Home</a> / Module 3</div>
+  <div class="eyebrow">Module 3 · Sessions 13–14</div>
+  <h1>Methods & Parameter Passing</h1>
+  <p class="lead">Method matlab ek kaam ka block jise naam dekar baar-baar bulaya (call) ja sake. Is module me methods banana, parameters, return type, overloading aur pass-by-value samjhenge.</p>
+
+  <h2 id="what">1. Method kya hai?</h2>
+  <p><strong>Method</strong> ek statements ka group hai jo ek specific kaam karta hai. Ek baar likho, jitni baar chahe <em>call</em> karo — isse code <strong>reuse</strong> hota hai aur program saaf rehta hai.</p>
+  <div class="callout tip"><span class="ico">💡</span><div><div class="t">Fayde (advantages)</div><p><strong>Code reusability</strong> (dobara likhne ki zaroorat nahi), <strong>readability</strong>, aur <strong>easy debugging</strong> — galti dhoondhna aasaan.</p></div></div>
+
+  <h2 id="syntax">2. Method ka Syntax</h2>
+  <pre><code>accessModifier returnType methodName(parameters) {
+    <span class="tok-com">// method body</span>
+    <span class="tok-key">return</span> value;   <span class="tok-com">// agar returnType void nahi hai</span>
+}</code></pre>
+  <div class="table-wrap"><table>
+    <tr><th>Part</th><th>Matlab</th></tr>
+    <tr><td>Access modifier</td><td><code>public</code>, <code>private</code> etc. — kaun access kar sakta hai.</td></tr>
+    <tr><td>Return type</td><td>Method kya wapas dega. Kuch na de to <code>void</code>.</td></tr>
+    <tr><td>Method name</td><td>Method ka naam (camelCase me likhte hain).</td></tr>
+    <tr><td>Parameters</td><td>Input values jo method leta hai (optional).</td></tr>
+  </table></div>
+  <h3>Example</h3>
+  <pre><code><span class="tok-com">// do numbers ka sum return karta hai</span>
+<span class="tok-key">public static</span> <span class="tok-type">int</span> add(<span class="tok-type">int</span> a, <span class="tok-type">int</span> b) {
+    <span class="tok-key">return</span> a + b;
+}
+
+<span class="tok-com">// call karna</span>
+<span class="tok-type">int</span> result = add(<span class="tok-num">10</span>, <span class="tok-num">20</span>);   <span class="tok-com">// result = 30</span></code></pre>
+
+  <h2 id="paramarg">3. Parameters vs Arguments (bahut poochha jaata hai)</h2>
+  <div class="table-wrap"><table>
+    <tr><th>Term</th><th>Kya hai</th><th>Kaha</th></tr>
+    <tr><td><strong>Parameter</strong></td><td>Method banate waqt di gayi variables (placeholder)</td><td><code>add(int a, int b)</code> — yaha <code>a</code>, <code>b</code></td></tr>
+    <tr><td><strong>Argument</strong></td><td>Method ko call karte waqt di gayi actual values</td><td><code>add(10, 20)</code> — yaha <code>10</code>, <code>20</code></td></tr>
+  </table></div>
+  <div class="callout tip"><span class="ico">💡</span><div><div class="t">Easy trick</div><p><strong>P</strong>arameter = <strong>P</strong>lace-holder (definition me). <strong>A</strong>rgument = <strong>A</strong>ctual value (call me).</p></div></div>
+
+  <h2 id="return">4. return type aur void</h2>
+  <ul>
+    <li>Agar method koi value wapas deta hai — uska <strong>return type</strong> likho (<code>int</code>, <code>String</code>...) aur <code>return</code> use karo.</li>
+    <li>Agar kuch wapas nahi deta — return type <code>void</code> hota hai (jaise print karne wala method).</li>
+  </ul>
+  <pre><code><span class="tok-key">public static void</span> greet() {          <span class="tok-com">// void = kuch return nahi</span>
+    System.out.println(<span class="tok-str">"Hello!"</span>);
+}
+
+<span class="tok-key">public static</span> <span class="tok-type">int</span> square(<span class="tok-type">int</span> n) {   <span class="tok-com">// int return karega</span>
+    <span class="tok-key">return</span> n * n;
+}</code></pre>
+
+  <h2 id="overload">5. Method Overloading</h2>
+  <p>Ek hi naam ke <strong>multiple methods</strong> banana — bas unke <strong>parameters alag</strong> hone chahiye (number ya type). Isse code padhna aasaan ho jaata hai.</p>
+  <pre><code><span class="tok-key">public static</span> <span class="tok-type">int</span> add(<span class="tok-type">int</span> a, <span class="tok-type">int</span> b) { <span class="tok-key">return</span> a + b; }
+<span class="tok-key">public static</span> <span class="tok-type">int</span> add(<span class="tok-type">int</span> a, <span class="tok-type">int</span> b, <span class="tok-type">int</span> c) { <span class="tok-key">return</span> a + b + c; }
+<span class="tok-key">public static</span> <span class="tok-type">double</span> add(<span class="tok-type">double</span> a, <span class="tok-type">double</span> b) { <span class="tok-key">return</span> a + b; }</code></pre>
+  <div class="callout warn"><span class="ico">⚠️</span><div><div class="t">Yaad rakho</div><p>Sirf <strong>return type</strong> alag hone se overloading nahi hoti — parameters (count ya type) alag hone chahiye.</p></div></div>
+
+  <h2 id="pass">6. Parameter Passing — Pass by Value</h2>
+  <p>Java me sab kuch <strong>pass by value</strong> hota hai — matlab method ko value ki ek <strong>copy</strong> milti hai, original nahi.</p>
+  <h3>a) Primitives ke saath</h3>
+  <p>Original variable par koi asar nahi padta, kyunki sirf copy jaati hai.</p>
+  <pre><code><span class="tok-key">static void</span> change(<span class="tok-type">int</span> x) { x = <span class="tok-num">100</span>; }
+
+<span class="tok-type">int</span> a = <span class="tok-num">5</span>;
+change(a);
+System.out.println(a);   <span class="tok-com">// output: 5 (badla nahi)</span></code></pre>
+  <h3>b) Objects/Arrays ke saath</h3>
+  <p>Yaha value bhi <em>copy</em> hoti hai, lekin wo value ek <strong>reference (address)</strong> hoti hai. Isliye method us hi object ko change kar sakta hai.</p>
+  <pre><code><span class="tok-key">static void</span> change(<span class="tok-type">int</span>[] arr) { arr[<span class="tok-num">0</span>] = <span class="tok-num">100</span>; }
+
+<span class="tok-type">int</span>[] nums = {<span class="tok-num">5</span>, <span class="tok-num">6</span>};
+change(nums);
+System.out.println(nums[<span class="tok-num">0</span>]);   <span class="tok-com">// output: 100 (badal gaya!)</span></code></pre>
+  <div class="callout exam"><span class="ico">🎯</span><div><div class="t">Exam point</div><p>Java <strong>hamesha pass-by-value</strong> hai. Primitives me actual value ki copy jaati hai; objects/arrays me <em>reference ki copy</em> jaati hai, isliye object ke andar changes reflect hote hain.</p></div></div>
+
+  <div class="keybox"><h4>✅ Quick Revision</h4><ul>
+    <li>Method = naam wala reusable kaam ka block.</li>
+    <li>Syntax: <code>modifier returnType name(params) { ... }</code></li>
+    <li><strong>Parameter</strong> = definition me placeholder; <strong>Argument</strong> = call me actual value.</li>
+    <li>Kuch return na kare to <code>void</code>.</li>
+    <li><strong>Overloading</strong> = same naam, alag parameters.</li>
+    <li>Java = <strong>pass by value</strong> (objects me reference ki copy).</li>
+  </ul></div>
+
+  <h3>Practice Questions</h3>
+  <details class="qa"><summary>Parameter aur argument me difference?</summary><div class="a">Parameter method ki definition me likhe variables hain (placeholder). Argument wo actual values hain jo call karte waqt pass karte ho.</div></details>
+  <details class="qa"><summary>Method overloading kya hai?</summary><div class="a">Same naam ke multiple methods jinke parameters (count ya type) alag hote hain. Sirf return type alag hone se overloading nahi hoti.</div></details>
+  <details class="qa"><summary>Java pass-by-value hai ya reference?</summary><div class="a">Java hamesha <strong>pass-by-value</strong> hai. Objects/arrays ke case me reference (address) ki copy jaati hai, isliye lagta hai jaise by reference ho.</div></details>
+
+  <div class="pager">
+    <a href="control-flow.html"><span class="dir">← Previous</span><span class="t2">Module 2: Control Flow</span></a>
+    <a class="nx" href="arrays-strings.html"><span class="dir">Next →</span><span class="t2">Module 4: Arrays & Strings</span></a>
+  </div>
+</div>
+</main>
+<footer class="wrap">Made for Ashu's Java ST-1 prep · Module 3 of 6</footer>
+<script src="js/main.js"></script>
+</body>
+</html>
