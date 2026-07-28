@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 6 — Static Members & Blocks | Java ST-1</title>
+<meta name="description" content="static variables, static methods, static blocks aur inhe kab use karna — detail me Hinglish notes.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-in">
+    <a class="brand" href="index.html"><span class="logo">J</span> Java ST-1</a>
+    <span class="spacer"></span>
+    <a class="home-link" href="index.html">← All Modules</a>
+  </div>
+</nav>
+<main>
+<div class="wrap">
+  <div class="crumbs"><a href="index.html">Home</a> / Module 6</div>
+  <div class="eyebrow">Module 6 · Sessions 33–36</div>
+  <h1>Static Members & Blocks</h1>
+  <p class="lead">Last module! <code>static</code> matlab jo cheez <strong>object ki nahi, class ki</strong> hoti hai — sab objects me common. Static variables, methods aur blocks yaha samjhenge.</p>
+
+  <h2 id="what">1. static ka matlab kya?</h2>
+  <p>Normal (instance) members har object ke apne alag hote hain. Lekin <code>static</code> member <strong>class ka</strong> hota hai — uski sirf <strong>ek hi copy</strong> banti hai jo saare objects me <strong>share</strong> hoti hai.</p>
+  <div class="callout tip"><span class="ico">💡</span><div><div class="t">Simple soch</div><p><strong>Instance</strong> = har student ka apna roll number (alag-alag). <strong>Static</strong> = school ka naam (sabhi students ke liye ek hi, common).</p></div></div>
+
+  <h2 id="var">2. Static Variable</h2>
+  <p>Class ke saare objects ke beech ek hi copy share hoti hai. Ek object badle to sabke liye badal jaata hai. Object banae bina <strong>class ke naam</strong> se access kar sakte ho.</p>
+  <pre><code><span class="tok-key">class</span> <span class="tok-type">Student</span> {
+    <span class="tok-type">String</span> name;              <span class="tok-com">// instance (har object ka apna)</span>
+    <span class="tok-key">static</span> <span class="tok-type">String</span> school = <span class="tok-str">"DPS"</span>;   <span class="tok-com">// static (sabme common)</span>
+}
+
+<span class="tok-type">Student</span> a = <span class="tok-key">new</span> <span class="tok-type">Student</span>();
+<span class="tok-type">Student</span> b = <span class="tok-key">new</span> <span class="tok-type">Student</span>();
+System.out.println(<span class="tok-type">Student</span>.school);   <span class="tok-com">// class ke naam se: DPS</span></code></pre>
+  <div class="callout tip"><span class="ico">💡</span><div><div class="t">Use case — counter</div><p>Static variable ka classic use: kitne objects bane ye ginna. Har baar constructor me <code>count++</code> karo — kyunki count sabme common hai, wo total ginta jaayega.</p></div></div>
+
+  <h2 id="method">3. Static Method</h2>
+  <p>Static method ko bhi object banae bina <strong>class ke naam</strong> se call karte hain. <code>main</code> method bhi static hi hota hai (isliye JVM bina object banaye use chala paata hai).</p>
+  <pre><code><span class="tok-key">class</span> <span class="tok-type">MathUtil</span> {
+    <span class="tok-key">static</span> <span class="tok-type">int</span> square(<span class="tok-type">int</span> n) {
+        <span class="tok-key">return</span> n * n;
+    }
+}
+
+<span class="tok-type">int</span> r = <span class="tok-type">MathUtil</span>.square(<span class="tok-num">5</span>);   <span class="tok-com">// object nahi banaya, direct call → 25</span></code></pre>
+  <div class="callout warn"><span class="ico">⚠️</span><div><div class="t">Bada rule (exam me aata hai)</div><p>Static method ke andar <strong>direct instance (non-static) variable ya method use nahi</strong> kar sakte, aur na hi <code>this</code> use kar sakte — kyunki static ka koi object hi nahi hota. Static sirf static ko direct access kar sakta hai.</p></div></div>
+
+  <h2 id="block">4. Static Block</h2>
+  <p><code>static { ... }</code> block ek baar chalta hai — jab class <strong>memory me load</strong> hoti hai, <strong>main method se bhi pehle</strong>, aur object banane se pehle. Ise static variables ko initialize karne ke liye use karte hain.</p>
+  <pre><code><span class="tok-key">class</span> <span class="tok-type">Demo</span> {
+    <span class="tok-key">static</span> <span class="tok-type">int</span> x;
+
+    <span class="tok-key">static</span> {                       <span class="tok-com">// static block</span>
+        x = <span class="tok-num">100</span>;
+        System.out.println(<span class="tok-str">"Static block chala"</span>);
+    }
+
+    <span class="tok-key">public static void</span> main(<span class="tok-type">String</span>[] args) {
+        System.out.println(<span class="tok-str">"Main chala, x = "</span> + x);
+    }
+}
+<span class="tok-com">// Output:
+// Static block chala
+// Main chala, x = 100</span></code></pre>
+
+  <h2 id="vs">5. Static vs Instance — ek nazar me</h2>
+  <div class="table-wrap"><table>
+    <tr><th>Cheez</th><th>Instance (non-static)</th><th>Static</th></tr>
+    <tr><td>Kiska hai</td><td>Object ka</td><td>Class ka</td></tr>
+    <tr><td>Copies</td><td>Har object ki alag</td><td>Sirf ek (shared)</td></tr>
+    <tr><td>Access kaise</td><td>Object ke through</td><td>Class ke naam se</td></tr>
+    <tr><td>Memory</td><td>Object banne par</td><td>Class load hone par</td></tr>
+    <tr><td><code>this</code> use</td><td>Ho sakta hai</td><td>Nahi ho sakta</td></tr>
+  </table></div>
+
+  <div class="keybox"><h4>✅ Quick Revision (poore syllabus ka last point)</h4><ul>
+    <li><code>static</code> = class ka member, ek hi shared copy, sab objects me common.</li>
+    <li>Access = <strong>ClassName.member</strong> (object ki zaroorat nahi).</li>
+    <li>Static method me <code>this</code> aur direct instance members allowed nahi.</li>
+    <li>Static block class load hote hi (main se pehle) ek baar chalta hai.</li>
+    <li><code>main</code> method static hota hai — isiliye JVM bina object ke chalata hai.</li>
+  </ul></div>
+
+  <h3>Practice Questions</h3>
+  <details class="qa"><summary>static variable aur instance variable me difference?</summary><div class="a">Instance variable har object ka alag hota hai. Static variable class ka hota hai — uski ek hi copy sab objects me share hoti hai.</div></details>
+  <details class="qa"><summary>Static method me this kyun use nahi kar sakte?</summary><div class="a">Kyunki static method class ka hota hai, kisi object ka nahi. <code>this</code> current object ko point karta hai, aur yaha koi object hi nahi hota, isliye allowed nahi.</div></details>
+  <details class="qa"><summary>Static block kab chalta hai?</summary><div class="a">Jab class memory me load hoti hai — <strong>main method aur object creation dono se pehle</strong>, aur sirf ek baar. Static variables ko set karne ke liye use hota hai.</div></details>
+  <details class="qa"><summary>main method static kyun hota hai?</summary><div class="a">Taaki JVM use object banae bina, seedha <code>ClassName.main()</code> ki tarah call kar sake. Agar static na hota to pehle object banana padta, jo shuruaat me possible nahi.</div></details>
+
+  <div class="pager">
+    <a href="oop.html"><span class="dir">← Previous</span><span class="t2">Module 5: Classes & Objects</span></a>
+    <a class="nx" href="index.html"><span class="dir">Finish →</span><span class="t2">Back to Home</span></a>
+  </div>
+</div>
+</main>
+<footer class="wrap">Made for Ashu's Java ST-1 prep · Module 6 of 6 · All done! 🎉</footer>
+<script src="js/main.js"></script>
+</body>
+</html>
