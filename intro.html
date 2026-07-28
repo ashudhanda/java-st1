@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 1 — Java Basics & Fundamentals | Java ST-1</title>
+<meta name="description" content="Java introduction, JDK/JRE/JVM, data types, variables aur operators — detail me Hinglish notes.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-in">
+    <a class="brand" href="index.html"><span class="logo">J</span> Java ST-1</a>
+    <span class="spacer"></span>
+    <a class="home-link" href="index.html">← All Modules</a>
+  </div>
+</nav>
+<main>
+<div class="wrap">
+  <div class="crumbs"><a href="index.html">Home</a> / Module 1</div>
+  <div class="eyebrow">Module 1 · Sessions 1–4</div>
+  <h1>Java Basics & Fundamentals</h1>
+  <p class="lead">Is module me hum Java kya hai, kaise chalta hai (JDK/JRE/JVM), data types, variables aur operators — sab kuch ekdum basic se samjhenge.</p>
+
+  <h2 id="intro">1. Java kya hai? (Introduction)</h2>
+  <p><strong>Java</strong> ek <strong>high-level, object-oriented programming language</strong> hai jo 1995 me <strong>Sun Microsystems</strong> (James Gosling) ne banayi thi. Aaj ise Oracle maintain karta hai.</p>
+  <p>Java ki sabse badi khaasiyat hai iska motto:</p>
+  <div class="callout tip"><span class="ico">💡</span><div><div class="t">WORA — "Write Once, Run Anywhere"</div><p>Ek baar code likho, aur wo <strong>kisi bhi OS</strong> (Windows, Mac, Linux) par chal jaayega — bina dobara likhe. Ye Java ki sabse important line hai, exam me aa sakti hai.</p></div></div>
+  <h3>Java ke main features (points me yaad rakho)</h3>
+  <ul>
+    <li><strong>Simple</strong> — C/C++ jaisa par aasan (pointers nahi).</li>
+    <li><strong>Object-Oriented</strong> — sab kuch class/object ke around.</li>
+    <li><strong>Platform Independent</strong> — bytecode kisi bhi JVM par chalta hai.</li>
+    <li><strong>Secure</strong> — no direct memory/pointer access.</li>
+    <li><strong>Robust</strong> — strong memory management + exception handling.</li>
+    <li><strong>Portable, Multithreaded, Architecture-neutral.</strong></li>
+  </ul>
+
+  <h2 id="jvm">2. JDK, JRE, JVM — (Bahut important)</h2>
+  <p>Ye teen cheezein log confuse karte hain. Ek simple relation yaad rakho:</p>
+  <div class="keybox"><h4>🔑 Ek line me relation</h4><ul><li><strong>JDK &gt; JRE &gt; JVM</strong> (JDK ke andar JRE, JRE ke andar JVM hota hai).</li></ul></div>
+  <div class="table-wrap"><table>
+    <tr><th>Term</th><th>Full Form</th><th>Kaam</th></tr>
+    <tr><td><strong>JVM</strong></td><td>Java Virtual Machine</td><td>Bytecode (.class) ko run karta hai. Platform independence isi ki wajah se milti hai. Ye ek <em>abstract machine</em> hai.</td></tr>
+    <tr><td><strong>JRE</strong></td><td>Java Runtime Environment</td><td>JVM + libraries. Java program <strong>chalane</strong> ke liye chahiye (run karne ke liye).</td></tr>
+    <tr><td><strong>JDK</strong></td><td>Java Development Kit</td><td>JRE + development tools (compiler <code>javac</code>, debugger). Java program <strong>banane</strong> ke liye chahiye.</td></tr>
+  </table></div>
+  <h3>Java code kaise chalta hai? (Compilation flow)</h3>
+  <p>Ye flow exam me diagram/steps ke roop me poochha jaata hai:</p>
+  <pre><code>Source Code (.java)
+      | ↓  javac (compiler)
+Bytecode (.class)
+      | ↓  JVM (interpreter + JIT)
+Machine Code → Output</code></pre>
+  <ol>
+    <li>Tum code likhte ho — <code>Hello.java</code></li>
+    <li><code>javac Hello.java</code> → compiler use ko <strong>bytecode</strong> <code>Hello.class</code> me badalta hai.</li>
+    <li><code>java Hello</code> → JVM us bytecode ko machine code me convert karke chalata hai.</li>
+  </ol>
+  <div class="callout exam"><span class="ico">🎯</span><div><div class="t">Exam point</div><p>Java <strong>compiled + interpreted dono</strong> hai. Pehle compile hoke bytecode banta hai (compiled), phir JVM use interpret karta hai (interpreted).</p></div></div>
+
+  <h3>Pehla program — Hello World</h3>
+  <pre><code><span class="tok-key">public class</span> <span class="tok-type">Hello</span> {
+    <span class="tok-key">public static void</span> main(<span class="tok-type">String</span>[] args) {
+        System.out.println(<span class="tok-str">"Hello World"</span>);
+    }
+}</code></pre>
+  <ul>
+    <li><code>public class Hello</code> — class ka naam file ke naam jaisa hona chahiye (<code>Hello.java</code>).</li>
+    <li><code>main</code> method — program yahin se chalna shuru hota hai (entry point).</li>
+    <li><code>System.out.println()</code> — screen par output print karta hai.</li>
+  </ul>
+
+  <h2 id="datatypes">3. Data Types</h2>
+  <p>Data type batata hai ki variable me <strong>kis type ka data</strong> store hoga. Java me 2 categories hain:</p>
+  <h3>a) Primitive Data Types (8 total)</h3>
+  <div class="table-wrap"><table>
+    <tr><th>Type</th><th>Size</th><th>Example</th><th>Kya store karta hai</th></tr>
+    <tr><td><code>byte</code></td><td>1 byte</td><td>10</td><td>Chhote whole numbers (-128 to 127)</td></tr>
+    <tr><td><code>short</code></td><td>2 byte</td><td>1000</td><td>Whole numbers</td></tr>
+    <tr><td><code>int</code></td><td>4 byte</td><td>50000</td><td>Aam whole numbers (most used)</td></tr>
+    <tr><td><code>long</code></td><td>8 byte</td><td>90000L</td><td>Bade whole numbers (L lagta hai)</td></tr>
+    <tr><td><code>float</code></td><td>4 byte</td><td>3.14f</td><td>Decimal (f lagta hai)</td></tr>
+    <tr><td><code>double</code></td><td>8 byte</td><td>3.14159</td><td>Bade/precise decimal</td></tr>
+    <tr><td><code>char</code></td><td>2 byte</td><td>'A'</td><td>Ek single character</td></tr>
+    <tr><td><code>boolean</code></td><td>1 bit</td><td>true/false</td><td>Sirf true ya false</td></tr>
+  </table></div>
+  <h3>b) Non-Primitive (Reference) Types</h3>
+  <p>Jaise <strong>String, Arrays, Classes, Objects</strong>. Ye objects ko refer karte hain, aur inme methods bhi hote hain (jaise <code>String</code> ka <code>.length()</code>).</p>
+  <div class="callout warn"><span class="ico">⚠️</span><div><div class="t">Common confusion</div><p><code>char</code> single quotes me hota hai — <code>'A'</code>. Aur <code>String</code> double quotes me — <code>"A"</code>. Ye galti mat karna.</p></div></div>
+
+  <h2 id="variables">4. Variables</h2>
+  <p><strong>Variable</strong> memory me ek naam wali jagah hai jisme value store hoti hai. Syntax: <code>datatype naam = value;</code></p>
+  <pre><code><span class="tok-type">int</span> age = <span class="tok-num">20</span>;
+<span class="tok-type">double</span> price = <span class="tok-num">99.5</span>;
+<span class="tok-type">char</span> grade = <span class="tok-str">'A'</span>;
+<span class="tok-type">String</span> name = <span class="tok-str">"Ashu"</span>;
+<span class="tok-type">boolean</span> isPass = <span class="tok-key">true</span>;</code></pre>
+  <h3>Variables ke 3 types (scope ke hisaab se)</h3>
+  <div class="table-wrap"><table>
+    <tr><th>Type</th><th>Kaha declare hota hai</th></tr>
+    <tr><td><strong>Local variable</strong></td><td>Method ke andar. Sirf usi method me use hota hai.</td></tr>
+    <tr><td><strong>Instance variable</strong></td><td>Class ke andar par method ke bahar. Har object ka apna copy.</td></tr>
+    <tr><td><strong>Static variable</strong></td><td>Class ke andar <code>static</code> ke saath. Sabhi objects me common (ek hi copy).</td></tr>
+  </table></div>
+  <div class="keybox"><h4>🔑 Variable naming rules</h4><ul><li>Letter, <code>$</code> ya <code>_</code> se start ho sakta hai (digit se nahi).</li><li>Space allowed nahi, keywords (jaise <code>int</code>) use nahi kar sakte.</li><li>Case-sensitive hai — <code>age</code> aur <code>Age</code> alag hain.</li></ul></div>
+
+  <h2 id="operators">5. Operators</h2>
+  <p>Operators variables/values par operation karte hain. Main types:</p>
+  <h3>a) Arithmetic Operators</h3>
+  <div class="table-wrap"><table>
+    <tr><th>Operator</th><th>Kaam</th><th>Example (a=10, b=3)</th></tr>
+    <tr><td><code>+</code></td><td>Add</td><td>a+b = 13</td></tr>
+    <tr><td><code>-</code></td><td>Subtract</td><td>a-b = 7</td></tr>
+    <tr><td><code>*</code></td><td>Multiply</td><td>a*b = 30</td></tr>
+    <tr><td><code>/</code></td><td>Divide (quotient)</td><td>a/b = 3</td></tr>
+    <tr><td><code>%</code></td><td>Modulus (remainder)</td><td>a%b = 1</td></tr>
+  </table></div>
+  <div class="callout warn"><span class="ico">⚠️</span><div><div class="t">Integer division trap</div><p><code>10 / 3</code> = <code>3</code> (decimal nahi), kyunki dono int hain. Decimal chahiye to ek ko double banao: <code>10.0 / 3</code> = 3.33.</p></div></div>
+  <h3>b) Relational (Comparison) Operators</h3>
+  <p><code>==</code> (equal), <code>!=</code> (not equal), <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code> — result hamesha <code>true</code>/<code>false</code>.</p>
+  <h3>c) Logical Operators</h3>
+  <p><code>&amp;&amp;</code> (AND), <code>||</code> (OR), <code>!</code> (NOT) — conditions ko jodne ke liye.</p>
+  <h3>d) Assignment Operators</h3>
+  <p><code>=</code>, <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, <code>%=</code>. Jaise <code>a += 5</code> ka matlab <code>a = a + 5</code>.</p>
+  <h3>e) Unary / Increment-Decrement</h3>
+  <p><code>++</code> (badhao), <code>--</code> (ghatao).</p>
+  <div class="callout exam"><span class="ico">🎯</span><div><div class="t">Pre vs Post (favourite exam question)</div><p><strong>Pre-increment</strong> <code>++a</code> — pehle badhao, phir use karo.<br><strong>Post-increment</strong> <code>a++</code> — pehle use karo, phir badhao.<br>Agar <code>a=5</code>: <code>b=a++</code> → b=5, a=6. Lekin <code>b=++a</code> → b=6, a=6.</p></div></div>
+
+  <div class="keybox"><h4>✅ Quick Revision (ek nazar me)</h4><ul>
+    <li><strong>Java</strong> = platform independent, OOP, WORA.</li>
+    <li><strong>JDK</strong> (banane) &gt; <strong>JRE</strong> (chalane) &gt; <strong>JVM</strong> (bytecode run).</li>
+    <li><code>.java</code> → <code>javac</code> → <code>.class</code> (bytecode) → JVM → output.</li>
+    <li><strong>8 primitive</strong> types; String non-primitive hai.</li>
+    <li>Integer division decimal nahi deta; <code>++a</code> vs <code>a++</code> yaad rakho.</li>
+  </ul></div>
+
+  <h3>Practice Questions (khud try karo)</h3>
+  <details class="qa"><summary>Java platform independent kyun hai?</summary><div class="a">Kyunki Java code compile hoke <strong>bytecode</strong> banta hai (machine code nahi). Ye bytecode kisi bhi OS ki <strong>JVM</strong> par chal jaata hai, isliye WORA.</div></details>
+  <details class="qa"><summary>JDK aur JRE me difference?</summary><div class="a">JRE sirf program <strong>chalane</strong> ke liye hai (JVM + libraries). JDK program <strong>banane</strong> ke liye hai (JRE + compiler jaise development tools).</div></details>
+  <details class="qa"><summary>int a = 7/2; ka output kya hoga?</summary><div class="a"><code>3</code>. Dono int hain to integer division hota hai, decimal part hat jaata hai.</div></details>
+
+  <div class="pager">
+    <a href="index.html"><span class="dir">← Back</span><span class="t2">All Modules</span></a>
+    <a class="nx" href="control-flow.html"><span class="dir">Next →</span><span class="t2">Module 2: I/O & Control Flow</span></a>
+  </div>
+</div>
+</main>
+<footer class="wrap">Made for Ashu's Java ST-1 prep · Module 1 of 6</footer>
+<script src="js/main.js"></script>
+</body>
+</html>
