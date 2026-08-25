@@ -1,4 +1,5 @@
-# Methods — Quick Revision ⚡
+# Methods — Quick Revision
+A brief overview of methods in Java, covering structure, overloading, pass by value, recursion, and exam tricky points ⚡
 
 ## Method structure
 ```java
