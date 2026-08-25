@@ -1,6 +1,10 @@
 // Small, performant progressive-enhancement script.
 // Fade-in on scroll using IntersectionObserver (respects reduced-motion).
 (function(){
+  /**
+   * Progressive enhancement script to fade-in elements on scroll.
+   * Uses IntersectionObserver, respecting reduced-motion preference.
+   */
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduce || !('IntersectionObserver' in window)) return;
   var els = document.querySelectorAll('[data-reveal]');
